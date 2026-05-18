@@ -39,6 +39,7 @@
     <Compile Include="DisplayManager.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Board.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Ex02.ConsoleUtils">
