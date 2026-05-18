@@ -13,7 +13,8 @@ namespace Ex02_01
             //InputManager.GetBoardSize();
             //InputManager.GetPosition(1, 5, out int numrow, out int numcol);
             //Console.Write("the num of row is: {0}, the num of column is: {1}", numrow, numcol);
-            InputManager.GetGameType();
+            int[,] mat = new int[4,5];
+            DisplayManager.PrintBoard(mat);
         }
         
     }
