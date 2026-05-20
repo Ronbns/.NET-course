@@ -36,8 +36,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AIPlayer.cs" />
+    <Compile Include="Board.cs" />
     <Compile Include="DisplayManager.cs" />
     <Compile Include="InputManager.cs" />
+    <Compile Include="Move.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
