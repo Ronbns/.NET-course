@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex02_01
+﻿namespace Ex02_01
 {
     internal class GameManager
     {
@@ -24,10 +18,10 @@ namespace Ex02_01
             }
         }
 
-
         public void StartGame()
         {
             int boardSize = InputManager.GetBoardSize();
+
             if (!s_QuitGame)
             {
                 m_GameBoard = new Board(boardSize);
@@ -35,6 +29,7 @@ namespace Ex02_01
                 Player player1 = new Player(ePlayerSymbol.O);
                 Player player2 = new Player(ePlayerSymbol.X);
                 AIPlayer playerAI = new AIPlayer();
+
                 if (!s_QuitGame)
                 {
                     m_GameType = (eGameType)tempGameType;
@@ -63,14 +58,14 @@ namespace Ex02_01
             }
         }
 
-        public void RunPlayerVsComputer(Player player1, AIPlayer player2)
+        public void RunPlayerVsComputer(Player i_Player1, AIPlayer i_Player2)
         {
             ePlayerSymbol? gameWinner = null;
             bool isBoardFull = false;
             DisplayManager.PrintBoard(m_GameBoard);
             while (!s_QuitGame && gameWinner == null && !isBoardFull)
             {
-                if(!UpdatePlayerMoveOnBoard(player1, 1))
+                if (!UpdatePlayerMoveOnBoard(i_Player1, 1))
                 {
                     DisplayManager.PrintBoard(m_GameBoard);
                     gameWinner = m_GameBoard.GetGameWinner();
@@ -78,36 +73,39 @@ namespace Ex02_01
 
                     if (gameWinner == null && !isBoardFull)
                     {
-                        UpdateAIPlayerMoveOnBoard(player2, 2);
+                        UpdateAIPlayerMoveOnBoard(i_Player2, 2);
                         DisplayManager.PrintBoard(m_GameBoard);
                         gameWinner = m_GameBoard.GetGameWinner();
                         isBoardFull = m_GameBoard.IsBoardFull();
                     }
+                } 
+            }
+            if (gameWinner != null)
+            {
+                if (gameWinner == ePlayerSymbol.O)
+                {
+                    i_Player1.IncreaseScore();
                 }
-                
+                else if (gameWinner != null)
+                {
+                    i_Player2.IncreaseScore();
+                }
             }
-            if (gameWinner == ePlayerSymbol.O)
-            {
-                player1.IncreaseScore();
-            }
-            else
-            {
-                player2.IncreaseScore();
-            }
+             
             DisplayManager.PrintEndScreen(gameWinner, s_QuitGame);
             if (!s_QuitGame)
             {
-                DisplayManager.PrintScore(player1.Score, player2.score, "Computer");
+                DisplayManager.PrintScore(i_Player1.Score, i_Player2.Score, "Computer");
             }
         }
-        public void RunTwoPlayers(Player player1, Player player2)
+        public void RunTwoPlayers(Player i_Player1, Player i_Player2)
         {
             ePlayerSymbol? gameWinner = null;
             bool isBoardFull = false;
             DisplayManager.PrintBoard(m_GameBoard);
-            while (!s_QuitGame && gameWinner ==null && !isBoardFull)
+            while (!s_QuitGame && gameWinner == null && !isBoardFull)
             {
-                if (!UpdatePlayerMoveOnBoard(player1, 1))
+                if (!UpdatePlayerMoveOnBoard(i_Player1, 1))
                 {
                     DisplayManager.PrintBoard(m_GameBoard);
                     gameWinner = m_GameBoard.GetGameWinner();
@@ -115,30 +113,32 @@ namespace Ex02_01
 
                     if (gameWinner == null && !isBoardFull)
                     {
-                        if (!UpdatePlayerMoveOnBoard(player2, 2))
+                        if (!UpdatePlayerMoveOnBoard(i_Player2, 2))
                         {
                             DisplayManager.PrintBoard(m_GameBoard);
                             gameWinner = m_GameBoard.GetGameWinner();
                             isBoardFull = m_GameBoard.IsBoardFull();
                         }
                     }
+                }  
+            }
+            if (gameWinner != null)
+            {
+                if (gameWinner == ePlayerSymbol.O)
+                {
+                    i_Player1.IncreaseScore();
                 }
-                
+                else if (gameWinner != null)
+                {
+                    i_Player2.IncreaseScore();
+                }
             }
 
-            if(gameWinner == ePlayerSymbol.O)
-            {
-                player1.IncreaseScore();
-            }
-            else
-            {
-                player2.IncreaseScore();
-            }
-            
+
             DisplayManager.PrintEndScreen(gameWinner, s_QuitGame);
             if (!s_QuitGame)
             {
-                DisplayManager.PrintScore(player1.Score, player2.Score, "Player 2");
+                DisplayManager.PrintScore(i_Player1.Score, i_Player2.Score, "Player 2");
             }
         }
 
@@ -146,7 +146,7 @@ namespace Ex02_01
         {
             bool isQuit = false;
             InputManager.GetPosition(i_NumOfPlayer, m_GameBoard.BoardSize, out int numInRow, out int numInCol);
-            if (numInCol != -1 &&  numInRow != -1)
+            if (numInCol != -1 && numInRow != -1)
             {
                 Move placeInMatPlayer1 = new Move(numInRow - 1, numInCol - 1);
 
@@ -169,15 +169,14 @@ namespace Ex02_01
             {
                 isQuit = true;
             }
+
             return isQuit;
         }
 
         public void UpdateAIPlayerMoveOnBoard(AIPlayer i_Player, int i_NumberOfPlayer)
         {
-            Move placeOnBoard = i_Player.generateRandomMove(m_GameBoard);
-            m_GameBoard.UpdateMove(placeOnBoard, i_Player.symbol);
+            Move placeOnBoard = i_Player.GenerateRandomMove(m_GameBoard);
+            m_GameBoard.UpdateMove(placeOnBoard, i_Player.Symbol);
         }
     }
-
-    
 }

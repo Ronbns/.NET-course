@@ -2,7 +2,9 @@
 {
     public enum ePlayerSymbol
     {
-        Space, X, O
+        Space,
+        X,
+        O
     }
 
     internal class Player
@@ -32,20 +34,16 @@
                 m_Symbol = value;
             }
         }
-        public Player(ePlayerSymbol symbol)
+
+        public Player(ePlayerSymbol i_Symbol)
         {
-            m_Symbol = symbol;
+            m_Symbol = i_Symbol;
             m_Score = 0;
         }
+
         public void IncreaseScore()
         {
             m_Score += 1;
         }
-
-        public void GetNextMove()
-        {
-            // call input function
-        }
-
     }
 }

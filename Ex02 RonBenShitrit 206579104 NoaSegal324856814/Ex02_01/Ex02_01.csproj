@@ -37,7 +37,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AIPlayer.cs" />
-    <Compile Include="Board.cs" />
     <Compile Include="DisplayManager.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="InputManager.cs" />
