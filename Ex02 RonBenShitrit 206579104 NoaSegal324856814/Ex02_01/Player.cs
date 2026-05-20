@@ -7,32 +7,39 @@
 
     internal class Player
     {
-        private ePlayerSymbol m_symbol
-        {
-            get 
-            {
-                return m_symbol;
-            }
-            set
-            {
-                m_symbol = value;
-            }
-        }
-        private int m_score
+        private ePlayerSymbol m_Symbol;
+        private int m_Score;
+        public int Score
         {
             get
             {
-                return m_score;
+                return m_Score;
             }
             set
             {
-                m_score = value;
+                m_Score = value;
             }
         }
-
+        
+        public ePlayerSymbol Symbol
+        {
+            get
+            {
+                return m_Symbol;
+            }
+            set
+            {
+                m_Symbol = value;
+            }
+        }
+        public Player(ePlayerSymbol symbol)
+        {
+            m_Symbol = symbol;
+            m_Score = 0;
+        }
         public void IncreaseScore()
         {
-            m_score += 1;
+            m_Score += 1;
         }
 
         public void GetNextMove()

@@ -9,22 +9,55 @@ namespace Ex02_01
 {
     internal class Board
     {
-        public int m_boardSize;
-        public ePlayerSymbol?[,] m_board;    
-        public Board(int i_boardSize)
+        private int m_BoardSize;
+        private ePlayerSymbol[,] m_GameBoard;
+
+
+        public int BoardSize
         {
-            m_boardSize = i_boardSize;
-            m_board = new ePlayerSymbol?[i_boardSize, i_boardSize];
+            get
+            {
+                return m_BoardSize;
+            }
+            set
+            {
+            }
+        }
+
+
+        public ePlayerSymbol[,] GameBoard
+        {
+            get 
+            {  
+                return m_GameBoard; 
+            }
+            set
+            {
+            }
+        }
+
+
+        public Board(int i_BoardSize)
+        {
+            m_BoardSize = i_BoardSize;
+            m_GameBoard = new ePlayerSymbol[m_BoardSize, m_BoardSize];
+            for (int row = 0; row < m_BoardSize; row++)
+            {
+                for (int column = 0; column < m_BoardSize; column++)
+                {
+                    m_GameBoard[row, column] = ePlayerSymbol.Space;
+                }
+            }
         }
 
         public List<Move> GetAllAvailableMoves()
         {
             List<Move> availableMoves = new List<Move>();
-            for (int i = 0; i < m_boardSize; i++)
+            for (int i = 0; i < m_BoardSize; i++)
             {
-                for (int j = 0; j < m_boardSize; j++)
+                for (int j = 0; j < m_BoardSize; j++)
                 {
-                    if (m_board[i, j] == null)
+                    if (m_GameBoard[i, j] == ePlayerSymbol.Space)
                     {
                         Move availableMove = new Move(i, j);
                         availableMoves.Add(availableMove);
@@ -33,22 +66,23 @@ namespace Ex02_01
             }
             return availableMoves;
         }
-        public bool CheckValidMove(Move i_move)
+
+        public bool CheckValidMove(Move i_Move)
         {
-            return m_board[i_move.m_row, i_move.m_col] == null;
+            return m_GameBoard[i_Move.m_row, i_Move.m_col] == ePlayerSymbol.Space;
         }
 
         public void UpdateMove(Move i_move, ePlayerSymbol playerSymbol)
         {
             if (CheckValidMove(i_move))
             {
-                m_board[i_move.m_row, i_move.m_col] = playerSymbol;
+                m_GameBoard[i_move.m_row, i_move.m_col] = playerSymbol;
             }
         }
 
         public void DeleteMove(Move i_move)
         {
-            m_board[i_move.m_row, i_move.m_col] = null;
+            m_GameBoard[i_move.m_row, i_move.m_col] = ePlayerSymbol.Space;
         }
 
         public ePlayerSymbol? GetGameWinner()
@@ -58,36 +92,36 @@ namespace Ex02_01
             {
                 gameWinner = ePlayerSymbol.O;
             }
-            if (HasDiagonalOf(ePlayerSymbol.O) || HasColumnOf(ePlayerSymbol.O) || HasRowOf(ePlayerSymbol.O))
+            else if (HasDiagonalOf(ePlayerSymbol.O) || HasColumnOf(ePlayerSymbol.O) || HasRowOf(ePlayerSymbol.O))
             {
-                gameWinner = ePlayerSymbol.X;
-            }
+                    gameWinner = ePlayerSymbol.X;
+            } 
             return gameWinner;
         }
         public bool IsBoardFull()
         {
             int filledCells = 0;
-            for (int i = 0; i < m_boardSize; i++)
+            for (int i = 0; i < m_BoardSize; i++)
             {
-                for (int j = 0; j < m_boardSize; j++)
+                for (int j = 0; j < m_BoardSize; j++)
                 {
-                    if (m_board[i, j] != null)
+                    if (m_GameBoard[i, j] != ePlayerSymbol.Space)
                     {
                         filledCells++;
                     }
                 }
             }
-            return (filledCells == m_boardSize*m_boardSize);
+            return (filledCells == m_BoardSize*m_BoardSize);
         }
 
         public bool HasRowOf(ePlayerSymbol i_playerSymbol)
         {
-            for (int i = 0; i < m_boardSize;  i++)
+            for (int i = 0; i < m_BoardSize;  i++)
             {
                 bool hasRowOf = true;
-                for (int j = 0 ; j < m_boardSize; j++)
+                for (int j = 0 ; j < m_BoardSize; j++)
                 { 
-                    if (m_board[i, j] != i_playerSymbol)
+                    if (m_GameBoard[i, j] != i_playerSymbol)
                     {
                         hasRowOf = false; 
                     }
@@ -102,24 +136,19 @@ namespace Ex02_01
 
         public bool HasColumnOf(ePlayerSymbol i_playerSymbol)
         {
-            for (int i = 0; i < m_boardSize; i++)
+            for (int i = 0; i < m_BoardSize; i++)
             {
                 bool HasColumnOf = true;
-                for (int j = 0; j < m_boardSize; j++)
-        {
-                    if (m_board[j,i] != i_playerSymbol)
-            m_BoardSize = InputManager.GetBoardSize();
-            m_board = new char[m_BoardSize, m_BoardSize];
-            for(int row = 0; row < m_BoardSize; row++)
-            {
+                for (int j = 0; j < m_BoardSize; j++)
+                {
+                    if (m_GameBoard[j,i] != i_playerSymbol)
+                    {
                         HasColumnOf = false;
                     }
                 }
                 if (HasColumnOf)
-                for(int column = 0; column < m_BoardSize; column++)
                 {
                     return true;
-                    m_board[row, column] = ' ';
                 }
             }
             return false;
@@ -130,23 +159,21 @@ namespace Ex02_01
             bool hasLeftDiagonalOf = true;
             bool hasRightDiagonalOf = true;
 
-            for (int i = 0; i < m_boardSize ; i++)
+            for (int i = 0; i < m_BoardSize ; i++)
             {
-                if (m_board[i,i] != i_playerSymbol)
+                if (m_GameBoard[i,i] != i_playerSymbol)
                 {
                     hasLeftDiagonalOf = false;
                 }
             }
-            for (int i = 0; i < m_boardSize; i++)
+            for (int i = 0; i < m_BoardSize; i++)
             {
-                if (m_board[i, m_boardSize - 1 - i] != i_playerSymbol)
-        public char[,] GetBoard()
+                if (m_GameBoard[i, m_BoardSize - 1 - i] != i_playerSymbol)
         {
                     hasRightDiagonalOf = false;
                 }
             }
             return hasLeftDiagonalOf || hasRightDiagonalOf;
-            return m_board;
         }
     }
 }

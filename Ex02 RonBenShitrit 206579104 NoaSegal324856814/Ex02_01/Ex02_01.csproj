@@ -39,11 +39,13 @@
     <Compile Include="AIPlayer.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="DisplayManager.cs" />
+    <Compile Include="GameManager.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="Move.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Board.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Ex02.ConsoleUtils">
