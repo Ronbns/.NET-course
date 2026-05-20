@@ -1,4 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Ex02_01
 {
     internal class Board
@@ -100,15 +106,20 @@ namespace Ex02_01
             {
                 bool HasColumnOf = true;
                 for (int j = 0; j < m_boardSize; j++)
-                {
+        {
                     if (m_board[j,i] != i_playerSymbol)
-                    {
+            m_BoardSize = InputManager.GetBoardSize();
+            m_board = new char[m_BoardSize, m_BoardSize];
+            for(int row = 0; row < m_BoardSize; row++)
+            {
                         HasColumnOf = false;
                     }
                 }
                 if (HasColumnOf)
+                for(int column = 0; column < m_BoardSize; column++)
                 {
                     return true;
+                    m_board[row, column] = ' ';
                 }
             }
             return false;
@@ -129,11 +140,13 @@ namespace Ex02_01
             for (int i = 0; i < m_boardSize; i++)
             {
                 if (m_board[i, m_boardSize - 1 - i] != i_playerSymbol)
-                {
+        public char[,] GetBoard()
+        {
                     hasRightDiagonalOf = false;
                 }
             }
             return hasLeftDiagonalOf || hasRightDiagonalOf;
+            return m_board;
         }
     }
 }
