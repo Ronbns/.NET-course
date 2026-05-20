@@ -64,11 +64,11 @@ namespace Ex02_01
 
         public static bool AnotherGame()
         {
-            bool result = false;
+            bool result = true;
             int numInput = CheckIfValidNumberWithCondition("Do you want to play again? enter 0 for another game and 1 to exit", 0, 1, out bool isQuit);
-            if(numInput == 0 || !isQuit)
+            if(numInput == 1 || isQuit)
             {
-                result = true;
+                result = false;
             }
             return result;
         }

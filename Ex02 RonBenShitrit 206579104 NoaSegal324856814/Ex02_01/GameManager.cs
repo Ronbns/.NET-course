@@ -33,6 +33,8 @@ namespace Ex02_01
                 m_GameBoard = new Board(boardSize);
                 int tempGameType = InputManager.GetGameType();
                 Player player1 = new Player(ePlayerSymbol.O);
+                Player player2 = new Player(ePlayerSymbol.X);
+                AIPlayer playerAI = new AIPlayer();
                 if (!s_QuitGame)
                 {
                     m_GameType = (eGameType)tempGameType;
@@ -41,13 +43,11 @@ namespace Ex02_01
                     {
                         if (m_GameType == eGameType.player)
                         {
-                            Player player2 = new Player(ePlayerSymbol.X);
                             RunTwoPlayers(player1, player2);
                         }
                         else
                         {
-                            AIPlayer player2 = new AIPlayer();
-                            RunPlayerVsComputer(player1, player2);
+                            RunPlayerVsComputer(player1, playerAI);
                         }
                         if (!s_QuitGame)
                         {
@@ -86,7 +86,7 @@ namespace Ex02_01
                 }
                 
             }
-            if (gameWinner == ePlayerSymbol.X)
+            if (gameWinner == ePlayerSymbol.O)
             {
                 player1.IncreaseScore();
             }
@@ -126,7 +126,7 @@ namespace Ex02_01
                 
             }
 
-            if(gameWinner == ePlayerSymbol.X)
+            if(gameWinner == ePlayerSymbol.O)
             {
                 player1.IncreaseScore();
             }
