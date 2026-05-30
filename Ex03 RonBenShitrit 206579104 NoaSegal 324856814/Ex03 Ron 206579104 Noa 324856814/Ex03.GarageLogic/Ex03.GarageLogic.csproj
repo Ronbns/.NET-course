@@ -38,14 +38,24 @@
   <ItemGroup>
     <Compile Include="Car.cs" />
     <Compile Include="ElectricCar.cs" />
+    <Compile Include="ElectricEngine.cs" />
     <Compile Include="ElectricMotorcycle.cs" />
+    <Compile Include="Engine.cs" />
     <Compile Include="FuelCar.cs" />
+    <Compile Include="FuelEngine.cs" />
     <Compile Include="FuelMotorcycle.cs" />
     <Compile Include="FuelTruck.cs" />
+    <Compile Include="GarageManager.cs" />
     <Compile Include="Motorcycle.cs" />
     <Compile Include="Truck.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="Tire.cs" />
+    <Compile Include="VehicleCreator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="VehiclesDB.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

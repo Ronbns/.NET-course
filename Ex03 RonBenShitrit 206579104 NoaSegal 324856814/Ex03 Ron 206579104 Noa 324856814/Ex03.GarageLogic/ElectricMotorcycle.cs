@@ -9,7 +9,9 @@ namespace Ex03.GarageLogic
     internal class ElectricMotorcycle : Motorcycle
     {
         public ElectricMotorcycle(string i_LicenseID, string i_ModelName) : base(i_LicenseID, i_ModelName)
-        { }
+        { 
+            m_Engine = new ElectricEngine(0f, 3f);
+        }
 
     }
 }

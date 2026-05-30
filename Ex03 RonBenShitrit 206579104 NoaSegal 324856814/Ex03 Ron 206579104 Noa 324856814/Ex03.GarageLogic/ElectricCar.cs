@@ -11,7 +11,7 @@ namespace Ex03.GarageLogic
         //m_engine
         public ElectricCar(string i_LicenseID,string i_ModelName) : base(i_LicenseID, i_ModelName)
         {
-            //m_engine = electricEngine;
+            m_Engine = new ElectricEngine(0f, 4.6f);
         }
     }
 }

@@ -17,10 +17,11 @@ namespace Ex03.GarageLogic
     {
         private eMotorcycleLicenseType m_LicenseType;
         private int m_EngineVolume;
-        private int m_NumberOfTires = 2;
-        private float m_MaximalTirePressure = 30;
+        
         public Motorcycle(string i_LicenseID, string i_ModelName) : base(i_LicenseID, i_ModelName)
         {
+            m_NumberOfTires = 2;
+            m_MaximalTirePressure = 30;
             for (int i = 0; i < m_NumberOfTires; i++)
             {
                 m_Tires.Add(new Tire(m_MaximalTirePressure));
